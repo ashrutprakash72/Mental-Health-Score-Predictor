@@ -1,4 +1,5 @@
-const API_URL = 'http://127.0.0.1:8001/predict';
+
+const API_URL = 'https://mental-health-score-predictor-3uha.onrender.com/predict';
 
 const form = document.querySelector('#prediction-form');
 const submitButton = document.querySelector('#submit-button');
