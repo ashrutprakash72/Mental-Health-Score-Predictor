@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7f4">
+  <title>Mindful Metrics · Mental health score predictor</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Mindful Metrics home">
+      <span class="brand-mark" aria-hidden="true">m</span>
+      <span>mindful<span class="brand-light">metrics</span></span>
+    </a>
+    <span class="top-note"><span class="live-dot" aria-hidden="true"></span> Student wellbeing insights</span>
+  </header>
+
+  <main id="top">
+    <section class="intro" aria-labelledby="page-title">
+      <div class="eyebrow"><span>✳</span> A moment for your wellbeing</div>
+      <h1 id="page-title">Understand your<br><em>digital wellbeing.</em></h1>
+      <p>Share a little about your daily habits and we’ll estimate a mental health score based on the project’s prediction model.</p>
+      <div class="privacy-note"><span aria-hidden="true">⌑</span> Your answers are used to generate this estimate.</div>
+    </section>
+
+    <div class="layout">
+      <form id="prediction-form" novalidate>
+        <section class="form-card" aria-labelledby="about-heading">
+          <div class="section-heading">
+            <span class="step">01</span><div><h2 id="about-heading">A little about you</h2><p>Start with a few basics.</p></div>
+          </div>
+          <div class="field-grid">
+            <div class="field"><label for="age">Age</label><input id="age" name="age" type="number" min="10" max="100" step="1" placeholder="e.g. 21" required><small>Between 10 and 100</small></div>
+            <div class="field"><label for="gender">Gender</label><select id="gender" name="gender" required><option value="" selected disabled>Select gender</option><option>Female</option><option>Male</option></select></div>
+            <div class="field"><label for="country">Country</label><select id="country" name="country" required><option value="" selected disabled>Select country</option><option>India</option><option>USA</option><option>Canada</option><option>Australia</option><option>UK</option><option>Germany</option><option>Mexico</option><option>Turkey</option><option>France</option><option>Other</option></select><small>Choose “Other” if not listed</small></div>
+            <div class="field"><label for="academic_level">Academic level</label><select id="academic_level" name="academic_level" required><option value="" selected disabled>Select level</option><option>High School</option><option>Undergraduate</option><option>Graduate</option></select></div>
+          </div>
+        </section>
+
+        <section class="form-card" aria-labelledby="habits-heading">
+          <div class="section-heading"><span class="step">02</span><div><h2 id="habits-heading">Your social media habits</h2><p>Think about a typical day.</p></div></div>
+          <div class="field-grid">
+            <div class="field"><label for="most_used_platform">Most used platform</label><select id="most_used_platform" name="most_used_platform" required><option value="" selected disabled>Choose a platform</option><option>Instagram</option><option>YouTube</option><option>TikTok</option><option>Facebook</option><option>Snapchat</option><option>Twitter</option><option>LinkedIn</option><option>WhatsApp</option><option>WeChat</option><option>LINE</option><option>KakaoTalk</option><option>VKontakte</option></select></div>
+            <div class="field"><label for="purpose_of_use">Main purpose</label><select id="purpose_of_use" name="purpose_of_use" required><option value="" selected disabled>Choose a purpose</option><option>Networking</option><option>Education</option><option>Entertainment</option><option>News</option></select></div>
+            <div class="field"><label for="avg_daily_usage_hours">Average daily use <span class="unit">hours</span></label><input id="avg_daily_usage_hours" name="avg_daily_usage_hours" type="number" min="0" max="24" step="0.1" placeholder="e.g. 4.5" required><small>0–24 hours</small></div>
+            <div class="field"><label for="daily_unlocks">Daily phone unlocks</label><input id="daily_unlocks" name="daily_unlocks" type="number" min="0" step="1" placeholder="e.g. 75" required><small>Enter a whole number</small></div>
+          </div>
+        </section>
+
+        <section class="form-card" aria-labelledby="routine-heading">
+          <div class="section-heading"><span class="step">03</span><div><h2 id="routine-heading">Your everyday routine</h2><p>Approximate hours are perfectly fine.</p></div></div>
+          <div class="field-grid">
+            <div class="field"><label for="study_hours">Study time <span class="unit">hours / day</span></label><input id="study_hours" name="study_hours" type="number" min="0" max="24" step="0.1" placeholder="e.g. 6" required><small>0–24 hours</small></div>
+            <div class="field"><label for="physical_activity_hours">Physical activity <span class="unit">hours / day</span></label><input id="physical_activity_hours" name="physical_activity_hours" type="number" min="0" max="24" step="0.1" placeholder="e.g. 1" required><small>0–24 hours</small></div>
+            <div class="field"><label for="sleep_hours_per_night">Sleep <span class="unit">hours / night</span></label><input id="sleep_hours_per_night" name="sleep_hours_per_night" type="number" min="0" max="24" step="0.1" placeholder="e.g. 7.5" required><small>0–24 hours</small></div>
+            <div class="field"><label for="stress_level">Current stress level</label><select id="stress_level" name="stress_level" required><option value="" selected disabled>Select a level</option><option>Low</option><option>Medium</option><option>High</option><option>Very High</option></select></div>
+          </div>
+        </section>
+        <div id="form-error" class="form-error" role="alert" hidden></div>
+        <button class="submit-button" id="submit-button" type="submit"><span>Generate my estimate</span><span aria-hidden="true">↗</span></button>
+        <p class="form-footnote">This model-generated score is for informational purposes and is not a diagnosis.</p>
+      </form>
+
+      <aside class="result-card" aria-labelledby="result-heading" aria-live="polite">
+        <div class="result-top"><span class="result-icon" aria-hidden="true">✳</span><span class="result-label">YOUR ESTIMATE</span></div>
+        <h2 id="result-heading">Your result<br>will appear here.</h2>
+        <p id="result-copy">Complete the questions to get a model-generated mental health score.</p>
+        <div id="score-wrap" class="score-wrap" hidden><span id="score-value">—</span><span class="score-caption">Predicted mental health score</span></div>
+        <div id="loading-state" class="loading-state" hidden><span class="spinner" aria-hidden="true"></span> Calculating your estimate…</div>
+        <div id="result-error" class="result-error" role="alert" hidden></div>
+        <div class="result-divider"></div>
+        <div class="result-foot"><span class="foot-icon" aria-hidden="true">♡</span><p>A score is just one data point. Be kind to yourself, and reach out to someone you trust if you need support.</p></div>
+      </aside>
+    </div>
+  </main>
+  <footer><span>mindfulmetrics</span><span>Built for reflection, not diagnosis.</span></footer>
+</body>
+</html>
